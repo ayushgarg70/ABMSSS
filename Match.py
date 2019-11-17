@@ -12,6 +12,10 @@ class Match:
         seller_perm=np.random.permutation(self.n_sellers)
         buyer_perm =np.random.permutation(self.n_buyers)
 
+
+        sum=0
+        count=0
+
         for seller_id in seller_perm:
             if Sellers[seller_id].get_status()==True:
                 for buyer_id in buyer_perm:
@@ -29,10 +33,16 @@ class Match:
 
                             print("Deal made between seller {} and buyer {}".format(seller_id,buyer_id))
                             print("Deal made at {} for seller_price {} and buyer_price{}".format(deal_price,Sellers[seller_id].get_price(),Buyers[buyer_id].get_price()))
+
+                            sum=sum+deal_price
+                            count=count+1
+
                             break
 
-
-
+        if count:
+            return (sum/count)
+        else:
+            return 0
 
 
 
