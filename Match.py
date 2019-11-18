@@ -20,7 +20,7 @@ class Match:
             if Sellers[seller_id].get_status()==True:
                 for buyer_id in buyer_perm:
                     if Buyers[buyer_id].get_status() == True:
-                        if Sellers[seller_id].get_price()<=Buyers[buyer_id].get_price():
+                        if Sellers[seller_id].get_price()<=Buyers[buyer_id].get_price() and (Buyers[buyer_id].get_price()-Sellers[seller_id].get_price()<=10) :
                             deal_price=np.random.randint(Sellers[seller_id].get_price(),Buyers[buyer_id].get_price()+1)
                             seller_reward=deal_price-Sellers[seller_id].get_price()
                             buyer_reward=1/(deal_price-Sellers[seller_id].get_price()+1)
