@@ -1,6 +1,7 @@
 from keras.layers import Dense,Input,Flatten
 import numpy as np
 from keras.models import Model
+from keras import initializers
 
 class Qvalue:
     def __init__(self,n_inputs):
@@ -10,16 +11,16 @@ class Qvalue:
     def create_model(self):
 
         input_shape=(self.n_inputs,1)
-        n_hidden1=70
-        n_hidden2=50
-        n_hidden3=20
+        n_hidden1=50
+        n_hidden2=30
+        n_hidden3=15
         n_outputs=1
 
         inputs= Input(shape=input_shape)
         x=Flatten()(inputs)
-        x=Dense(n_hidden1,activation='relu')(x)
-        x=Dense(n_hidden2,activation='relu')(x)
-        x=Dense(n_hidden3,activation='relu')(x)
+        x=Dense(n_hidden1,activation='relu',kernel_initializer=initializers.Zeros())(x)
+        x=Dense(n_hidden2,activation='relu',kernel_initializer=initializers.Zeros())(x)
+        x=Dense(n_hidden3,activation='relu',kernel_initializer=initializers.Zeros())(x)
         output=Dense(n_outputs)(x)
 
         model = Model(inputs=inputs, outputs=output)

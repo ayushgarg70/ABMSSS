@@ -9,14 +9,13 @@ class Seller:
         self.id=id
         self.price=100
         self.epsilon=0.9
-        self.epsilon_decay=0.01
+        self.epsilon_decay=0.1
         self.Qvalue=Value.Qvalue(n_buyers+2)
         self.is_in_game=True
         self.action=0
         self.gamma=0.9
 
     def reset(self):
-        self.epsilon=0.9
         self.is_in_game=True
 
     def get_price(self):
@@ -37,10 +36,10 @@ class Seller:
         for x in action:
             Qvals.append(self.Qvalue.get_Qvalue(x, self.price, opposite_bids))
 
-        max_Qval = np.max(Qvals)
+        max_Qval = np.amax(Qvals)
         target=reward+self.gamma*max_Qval
 
-        self.Qvalue.train(self.action,self.price,opposite_bids,target)
+        self.Qvalue.train(self.action,self.price-self.action,opposite_bids,target)
 
     def get_optimal_policy(self,previous_buyers_bids):
         action=[i for i in range(-10,11) if i%2==0]
@@ -62,11 +61,19 @@ class Seller:
             eps=np.random.uniform()
 
             if eps<self.epsilon:
+                x=self.price
                 self.action=2*np.random.randint(-5,6)
                 self.price = self.price + self.action
+                if self.price<=80:
+                    self.price=80
+                    self.action = self.price - x
             else:
+                x = self.price
                 self.action=self.get_optimal_policy(previous_buyers_bids)
                 self.price = self.price + self.action
+                if self.price<=80:
+                    self.price=80
+                    self.action = self.price - x
 
             self.decay()
         else :
