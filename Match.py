@@ -11,7 +11,7 @@ class Match:
 
         seller_perm=np.random.permutation(self.n_sellers)
         buyer_perm =np.random.permutation(self.n_buyers)
-        punishment=-10
+        punishment=-50
 
         sum=0
         count=0
@@ -21,10 +21,13 @@ class Match:
                 for buyer_id in buyer_perm:
                     if Buyers[buyer_id].get_status() == True:
                         # and Buyers[buyer_id].get_price() - Sellers[seller_id].get_price() <= 2
-                        if Sellers[seller_id].get_price()<=Buyers[buyer_id].get_price() :
+                        if Sellers[seller_id].get_price()<=Buyers[buyer_id].get_price():
                             deal_price=np.random.randint(Sellers[seller_id].get_price(),Buyers[buyer_id].get_price()+1)
                             seller_reward=deal_price-80
                             buyer_reward=1/(deal_price-80+1)
+                            # seller_reward=0
+                            # buyer_reward = 0
+                            # deal_price=Sellers[seller_id].get_price()
 
                             Sellers[seller_id].update_qvalue(seller_reward,previous_buyers_bids)
                             Buyers[buyer_id].update_qvalue(buyer_reward,previous_sellers_bids)

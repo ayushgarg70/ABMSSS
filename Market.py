@@ -37,15 +37,15 @@ def initialize():
     previous_sellers_bids = np.random.normal(100, 5, (n_sellers))
 
 
-def bid_r(previous_buyers_bids,previous_sellers_bids):
+def bid_r(previous_buyers_bids,previous_sellers_bids,round):
     global Sellers
     global Buyers
 
     for x in Sellers:
-        x.bid(previous_buyers_bids)
+        x.bid(previous_buyers_bids,round)
 
     for x in Buyers:
-        x.bid(previous_sellers_bids)
+        x.bid(previous_sellers_bids,round)
 
 def reset():
     global Sellers
@@ -74,6 +74,8 @@ if __name__=="__main__":
     number_of_deals = []
     particular_seller=[]
     particular_buyer=[]
+    particular_seller_reward= []
+    particular_buyer_reward= []
 
     for j in range(n_games):
         reset()
@@ -82,15 +84,8 @@ if __name__=="__main__":
 
             print('Game {}: Round {}'.format(j,i))
 
-            bid_r(previous_buyers_bids,previous_sellers_bids)
+            bid_r(previous_buyers_bids,previous_sellers_bids,j)
 
-            for x in Sellers:
-                if x.id==10:
-                    particular_seller.append(x.get_price())
-
-            for x in Buyers:
-                if x.id==20:
-                    particular_buyer.append(x.get_price())
 
             #match_maker returns updated list of sellers and buyers in the game and a
             #dictionary for matched sellers and buyers containing their ids and rewards
@@ -103,19 +98,44 @@ if __name__=="__main__":
             for x in Buyers:
                 previous_buyers_bids.append(x.get_price())
 
+
             for x in Sellers:
                 previous_sellers_bids.append(x.get_price())
 
-            avg_deal=deal
-            avg_seller= np.sum(previous_sellers_bids)/n_sellers
-            avg_buyer = np.sum(previous_buyers_bids)/n_buyers
 
-            if avg_deal!=0:
-                average_deal.append(avg_deal)
-            average_seller_price.append(avg_seller)
-            average_buyer_price.append(avg_buyer)
-            if avg_deal != 0:
-                number_of_deals.append(number)
+            if j>10:
+                for x in Sellers:
+                    if x.id == 10:
+                        particular_seller.append(x.get_price())
+                        particular_seller_reward.append(x.get_reward())
+
+                for x in Buyers:
+                    if x.id == 20:
+                        particular_buyer.append(x.get_price())
+                        particular_buyer_reward.append(x.get_reward())
+
+                avg_deal = deal
+                avg_seller = np.sum(previous_sellers_bids) / n_sellers
+                avg_buyer = np.sum(previous_buyers_bids) / n_buyers
+
+                if avg_deal != 0:
+                    average_deal.append(avg_deal)
+                average_seller_price.append(avg_seller)
+                average_buyer_price.append(avg_buyer)
+                if number != 0:
+                    number_of_deals.append(number)
+
+        for x in Sellers:
+            if x.id == 10:
+                action = [i for i in range(-10, 11) if i % 2 == 0]
+                Qvals = []
+
+                for y in action:
+                    Qvals.append(x.Qvalue.get_Qvalue(y, x.price, previous_buyers_bids))
+
+                print(Qvals)
+
+
 
     plt.figure()
     plt.title('average_deal')
@@ -135,4 +155,10 @@ if __name__=="__main__":
     plt.figure()
     plt.title('Seller number 10')
     plt.plot(particular_seller)
+    plt.figure()
+    plt.title('Buyer number 20 reward')
+    plt.plot(particular_buyer_reward)
+    plt.figure()
+    plt.title('Seller number 10 reward')
+    plt.plot(particular_seller_reward)
     plt.show()
