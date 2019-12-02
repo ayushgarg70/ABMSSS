@@ -60,7 +60,7 @@ class Seller:
         x=np.argmax(Qvals)
         # print(Qvals)
 
-        print(action[x])
+#         print(action[x])
         return action[x]
 
     def bid(self,previous_buyers_bids,round):
