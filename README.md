@@ -26,33 +26,37 @@ Reinforcement Learning for Market Simulation
 
 ## Dependencies
 
-<img alt="General result of seller vs buyer" src="/images/sellervbuyer.jpg" style="align: center;"/>
 
-For each state (microstate), we define a SZR model that evaluates the evolution of the different populations under studies: susceptibles (S), zombies (Z) and removed (R). Epidemological-like transfer of populations between the states (at the macrostate level) also occurs as defined above and models the refugees and zombie transfer across states. Those transfers are parameters dependants, which depend on the cost-hypothesis as defined by the Game-Theoretical paradigm implemented. The apparition of zombies in one state will start the game. Each state will then evolve on the domestic and international level. The domestic level will follow a standard SZR model, whereas the international level will introduce exchange in the population of suceptible and zombie between the states. These exchanges will be influenced by the state decisions on foreign policies such as humanitarian or military actions determined by our game theory framework. The Game-Theoretical framework is defined as the possibility of undertaking military action of foreign soil (exporting S) or changing the refugee politics by modifying the mu parameter (allowing more S to come into one's state, and with a collateral cost of having more zombies crossing as well). Each action will be defined with a specific payoff, which in turn will depend on the international cooperation system under scrutiny. For simplicity, we will only model homogenous systems, i.e. all the states will adopt the same international politics paradigm. Finally, we will also introduce a "feedback" loop on the payoff depending on the success of a previously undertaken action (positive or negative affectation of the payoffs). This effect models the psychological effect of a successful or unsuccessful action on future action, for example the effectiveness of a military attack. This effect will be made as to converge after a certain time to model the wearing out of the psychological effect over time. The system will be implemented as a step-based update. This implies the ignorance of the actors (the states) of the action of the other actors. This rationalisation comes as the idea that the outbreak would occur over a short period of time, forcing for rapid decision-making and therefore not allow a reaction-based decision-making process. 
 
-## Fundamental Questions
+>To run the code you will need to install python3.x
 
-Investigation of the application of the SIR model to a zombie outbreak has already been studied, raising the fear of dark days for humanity. However, we would like to deepen this investigation to a multi-state system to see how interactions between subpopulation may brighten the future of the human race. Moreover, we are interested in seeing to what extent the different paradigms of international politics, *Realpolitik*, Liberalism and Neoconservatism as defined by Daniel W. Drezner in *Theories of International Politics and zombies* may lead to different outcomes.
+Assuming the above you'll need to have the following libraries installed:
+1. numpy 
+   *pip install numpy
+2. keras
+   *pip install keras
+3. tensorflow 
+   *pip install --upgrade tensorflow
+4. scikit-learn
+   *pip install scikit-learn
+5. matplotlib
+   *python -m pip install -U matplotlib
+   
+ ## Procedure
+
+Having installed all the dependencies, clone the git repository to a convenient location and open a terminal session in that directory.
+Type **python3 Market.py** or **python Market.py**
+
 
 ## Expected Results
 
-As describe in Drezner's book, we except different equilibrium outcomes depending on the paradigm under consideration. He postulates the possibile appearance of zombie states under *Realpolitik* and Liberalism paradigms while Neoconservatism would not allow such an outcome.
+<img alt="General result of seller vs buyer" src="/images/Figure_2.png" style="align: center;"/>
+
+Plots similar to the ones shown above should be shown automatically. 
 
 ## References 
 
-1. Daniel W. Drezner, *Theories of International Politics and Zombies* (Princeton Univ. Press, 2011)
-2. Philip Munz, Ioan Hudea, Joe Imad, Robert J. Smith?, *Infectious Disease Modelling Research Progress: 4 - When Zombies Attack!: Mathematical Modelling of an Outbreak of Zombie Infection* (Nova Science Publisher, 2009) 
-3. Timothy C. Reluga, *An SIS epidemiology game with two subpopulations*, Journal of Biological Dynamics, **3**, 515-531 (2009)
-4. Timothy C. Reluga, *Game Theory of Social Distancing in Response to an Epidemic*, PLOS Computational Biology, **6** (2010)
-5. Sebastian Funk, MArcel Salathé, Vincent A. A. Jansen, *Modelling the Influence of Human Behaviour on the Spread of Infectious Diseases: A Review*, J. R. Soc. Interface, **7**, 1247-1256 (2010)
-6. Duygu Baclan and Alessandro Vespigniani, *Phase Transitions in Contagion Processes Mediated by Recurrent Mobility Pattern*, Nature Physics, **7**, 581-586 (2011)
-7. Peter G. Bennett, *Modelling Decisions in International Relations: Game Theory and Beyond*, Mershon Int. Studies Review, **39**, 19-52 (1995)
-
-## Research Methods
-
-We would like to tackle this question by using a two-level model. Intra-state populations would be modelled by a standard SIR (Kermack-McKendrick) model or an evolution of it that might include quarantined poplutions and more evolved parameters. On the next level, the inter-state relationships would be modelled using Game-Theory under different cost-hypothesis related to the main paradigms of international relationships as previously defined. 
-
-## Other
-
-The material necessary for defining our models of zombies and 'zombification' parameters will be extracted from the canon of the zombie popular culture such as *World War Z* (Brooks, 2006), *28 Days Later* (Boyle, 2002), *The Night of the Living Dead* (Romero, 1968), *Zombieland* (Fleischer, 2009), Resident Evil (Capcom, 1996), etc.
+1. Rowel Atienza, *Advanced Deep Learning with Keras* (2018)
+2. Frank L. Lewis, Draguna L. Vrabie and Vassilis L. Syrmos, *Optimal Control* (Third Edition)
+3. Richard S. Sutton and Andrew G. Barto, *Reinforcement Learning: An Introduction* (2018)
 
