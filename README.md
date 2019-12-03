@@ -32,15 +32,15 @@ Reinforcement Learning for Market Simulation
 
 Assuming the above you'll need to have the following libraries installed:
 1. numpy 
-   *pip install numpy
+   *pip install numpy*
 2. keras
-   *pip install keras
+   *pip install keras*
 3. tensorflow 
-   *pip install --upgrade tensorflow
+   *pip install --upgrade tensorflow*
 4. scikit-learn
-   *pip install scikit-learn
+   *pip install scikit-learn*
 5. matplotlib
-   *python -m pip install -U matplotlib
+   *python -m pip install -U matplotlib*
    
  ## Procedure
 
