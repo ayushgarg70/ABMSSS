@@ -7,12 +7,12 @@ class Match:
         self.n_sellers=n_sellers
         self.n_buyers =n_buyers
 
+
     def make_matches(self,Sellers,Buyers,previous_buyers_bids,previous_sellers_bids):
 
         seller_perm=np.random.permutation(self.n_sellers)
         buyer_perm =np.random.permutation(self.n_buyers)
-        punishment=-50
-
+        punishment=-20
         sum=0
         count=0
 
@@ -24,7 +24,7 @@ class Match:
                         if Sellers[seller_id].get_price()<=Buyers[buyer_id].get_price():
                             deal_price=np.random.randint(Sellers[seller_id].get_price(),Buyers[buyer_id].get_price()+1)
                             seller_reward=deal_price-80
-                            buyer_reward=1/(deal_price-80+1)
+                            buyer_reward=10/(deal_price-80+1)
                             # seller_reward=0
                             # buyer_reward = 0
                             # deal_price=Sellers[seller_id].get_price()

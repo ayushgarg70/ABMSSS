@@ -3,21 +3,20 @@ import Buyer
 import Match
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 
 
 n_sellers=50
 n_buyers=50
 n_rounds=5
-n_games=100
+n_games=200
 Sellers=[]
 Buyers=[]
 matched_sellers=dict()
 matched_buyers=dict()
-match_maker=Match.Match(n_sellers,n_buyers)
 previous_buyers_bids=[]
 previous_sellers_bids=[]
 prices=[]
-
 
 def initialize():
     global Sellers
@@ -68,6 +67,7 @@ def reset():
 if __name__=="__main__":
 
     initialize()
+    match_maker = Match.Match(n_sellers, n_buyers)
     average_deal = []
     average_seller_price=[]
     average_buyer_price = []
@@ -103,14 +103,14 @@ if __name__=="__main__":
                 previous_sellers_bids.append(x.get_price())
 
 
-            if j>10:
+            if j>100:
                 for x in Sellers:
-                    if x.id == 10:
+                    if x.id == 1:
                         particular_seller.append(x.get_price())
                         particular_seller_reward.append(x.get_reward())
 
                 for x in Buyers:
-                    if x.id == 20:
+                    if x.id == 2:
                         particular_buyer.append(x.get_price())
                         particular_buyer_reward.append(x.get_reward())
 
@@ -125,40 +125,40 @@ if __name__=="__main__":
                 if number != 0:
                     number_of_deals.append(number)
 
-        for x in Sellers:
-            if x.id == 10:
-                action = [i for i in range(-10, 11) if i % 2 == 0]
-                Qvals = []
-
-                for y in action:
-                    Qvals.append(x.Qvalue.get_Qvalue(y, x.price, previous_buyers_bids))
-
-                print(Qvals)
 
 
-
-    plt.figure()
+    plt.figure(1)
     plt.title('average_deal')
     plt.plot(average_deal)
-    plt.figure()
+    plt.figure(2)
     plt.title('average_seller_price')
     plt.plot(average_seller_price)
-    plt.figure()
+    plt.figure(3)
     plt.title('average_buyer_price')
     plt.plot(average_buyer_price)
-    plt.figure()
+    plt.figure(4)
     plt.title('number_of_deals')
     plt.plot(number_of_deals)
-    plt.figure()
-    plt.title('Buyer number 20')
+    plt.figure(5)
+    plt.title('Buyer number 2')
     plt.plot(particular_buyer)
-    plt.figure()
-    plt.title('Seller number 10')
+    plt.figure(6)
+    plt.title('Seller number 1')
     plt.plot(particular_seller)
-    plt.figure()
-    plt.title('Buyer number 20 reward')
+    plt.figure(7)
+    plt.title('Buyer number 2 reward')
     plt.plot(particular_buyer_reward)
-    plt.figure()
-    plt.title('Seller number 10 reward')
+    plt.figure(8)
+    plt.title('Seller number 1 reward')
     plt.plot(particular_seller_reward)
     plt.show()
+
+    df=pd.DataFrame(average_buyer_price,columns=['col'])
+    df.to_csv('./buyerprice5.csv',index=False)
+
+    df2 = pd.DataFrame(average_seller_price, columns=['col'])
+    df2.to_csv('./sellerprice5.csv', index=False)
+    #
+    df3 = pd.DataFrame(average_deal, columns=['col'])
+    df3.to_csv('./averagedeal5.csv', index=False)
+

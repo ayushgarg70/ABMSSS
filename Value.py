@@ -15,14 +15,17 @@ class Qvalue:
         input_shape=(self.n_inputs,1)
         n_hidden1=50
         n_hidden2=30
-        n_hidden3=10
+        n_hidden3=20
+        n_hidden4=10
         n_outputs=1
 
         inputs= Input(shape=input_shape)
         x=Flatten()(inputs)
-        x=Dense(n_hidden1,activation='sigmoid',kernel_initializer=initializers.Zeros())(x)
-        x=Dense(n_hidden2,activation='sigmoid',kernel_initializer=initializers.Zeros())(x)
-        x=Dense(n_hidden3,activation='sigmoid',kernel_initializer=initializers.Zeros())(x)
+        # kernel_initializer = initializers.Zeros()
+        x=Dense(n_hidden1,activation='sigmoid',use_bias=True,kernel_initializer='random_uniform')(x)
+        x=Dense(n_hidden2,activation='sigmoid',use_bias=True,kernel_initializer='random_uniform')(x)
+        x=Dense(n_hidden3,activation='sigmoid',use_bias=True,kernel_initializer='random_uniform')(x)
+        x = Dense(n_hidden4, activation='sigmoid',use_bias=True, kernel_initializer='random_uniform')(x)
         output=Dense(n_outputs)(x)
 
         model = Model(inputs=inputs, outputs=output)
