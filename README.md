@@ -44,8 +44,8 @@ Assuming the above you'll need to have the following libraries installed:
    
  ## Procedure
 
-Having installed all the dependencies, clone the git repository to a convenient location and open a terminal session in that directory.
-Type
+Having installed all the dependencies, clone the git repository to a convenient location and cd into that directory. Open a terminal session in that directory and type
+
 > **python3 Market.py** 
 or
 > **python Market.py**
