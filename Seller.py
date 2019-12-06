@@ -1,5 +1,4 @@
 import Value
-import Value2
 import numpy as np
 
 #each seller has 11 options,whether to increase price by +2 +4 +6 +8 +10 or decrease by -2 -4 -6 -8 -10
@@ -75,7 +74,7 @@ class Seller:
 
         if self.is_in_game:
 
-            if round < 100:
+            if round < 50:
                 x = self.price
                 self.action = 2 * np.random.randint(-5, 6)
                 self.price = self.price + self.action

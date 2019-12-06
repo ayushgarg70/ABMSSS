@@ -6,10 +6,10 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
-n_sellers=50
-n_buyers=50
+n_sellers=20
+n_buyers=20
 n_rounds=5
-n_games=200
+n_games=50
 Sellers=[]
 Buyers=[]
 matched_sellers=dict()
@@ -103,7 +103,7 @@ if __name__=="__main__":
                 previous_sellers_bids.append(x.get_price())
 
 
-            if j>100:
+            if j>10:
                 for x in Sellers:
                     if x.id == 1:
                         particular_seller.append(x.get_price())
@@ -136,29 +136,30 @@ if __name__=="__main__":
     plt.figure(3)
     plt.title('average_buyer_price')
     plt.plot(average_buyer_price)
-    plt.figure(4)
-    plt.title('number_of_deals')
-    plt.plot(number_of_deals)
-    plt.figure(5)
-    plt.title('Buyer number 2')
-    plt.plot(particular_buyer)
-    plt.figure(6)
-    plt.title('Seller number 1')
-    plt.plot(particular_seller)
-    plt.figure(7)
-    plt.title('Buyer number 2 reward')
-    plt.plot(particular_buyer_reward)
-    plt.figure(8)
-    plt.title('Seller number 1 reward')
-    plt.plot(particular_seller_reward)
     plt.show()
-
-    df=pd.DataFrame(average_buyer_price,columns=['col'])
-    df.to_csv('./buyerprice5.csv',index=False)
-
-    df2 = pd.DataFrame(average_seller_price, columns=['col'])
-    df2.to_csv('./sellerprice5.csv', index=False)
+    # plt.figure(4)
+    # plt.title('number_of_deals')
+    # plt.plot(number_of_deals)
+    # plt.figure(5)
+    # plt.title('Buyer number 2')
+    # plt.plot(particular_buyer)
+    # plt.figure(6)
+    # plt.title('Seller number 1')
+    # plt.plot(particular_seller)
+    # plt.figure(7)
+    # plt.title('Buyer number 2 reward')
+    # plt.plot(particular_buyer_reward)
+    # plt.figure(8)
+    # plt.title('Seller number 1 reward')
+    # plt.plot(particular_seller_reward)
+    # # plt.show()
     #
-    df3 = pd.DataFrame(average_deal, columns=['col'])
-    df3.to_csv('./averagedeal5.csv', index=False)
+    # df=pd.DataFrame(average_buyer_price,columns=['col'])
+    # df.to_csv('./buyerpricelongrun.csv',index=False)
+    #
+    # df2 = pd.DataFrame(average_seller_price, columns=['col'])
+    # df2.to_csv('./sellerpricelongrun.csv', index=False)
+    # #
+    # df3 = pd.DataFrame(average_deal, columns=['col'])
+    # df3.to_csv('./averagedeal6.csv', index=False)
 
